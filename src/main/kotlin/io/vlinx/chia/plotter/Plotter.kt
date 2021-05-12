@@ -51,24 +51,29 @@ class Plotter(private val settings: Settings) {
             }
 
             var taskId = "Task $totalTasks"
-            try {
-                val taskIndex = totalTasks % settings.taskCount
-                val runnable = Runnable { startTask(taskIndex, taskId) }
-                val thread = Thread(runnable)
-                thread.isDaemon = true
-                thread.start()
-                runningTasks++
-                totalTasks++
 
-                if (settings.taskDelay > 0) {
-                    Logger.INFO(taskId, "Wait ${settings.taskDelay}s to start another task")
-                    Thread.sleep((settings.taskDelay * 1000).toLong())
+            val taskIndex = totalTasks % settings.taskCount
+            val runnable = Runnable {
+                try {
+                    startTask(taskIndex, taskId)
+                } catch (e: Exception) {
+                    Logger.ERROR(taskId, e.message)
+                }finally {
+                    runningTasks--
                 }
-
-            } catch (e: Exception) {
-                runningTasks--
-                Logger.ERROR(taskId, e.message)
             }
+            val thread = Thread(runnable)
+            thread.isDaemon = true
+            thread.start()
+            runningTasks++
+            totalTasks++
+
+            if (settings.taskDelay > 0) {
+                Logger.INFO(taskId, "Wait ${settings.taskDelay}s to start another task")
+                Thread.sleep((settings.taskDelay * 1000).toLong())
+            }
+
+
         }
 
 
@@ -110,7 +115,6 @@ class Plotter(private val settings: Settings) {
 
         ProcessUtils.run(command, true)
         Logger.INFO(taskId, "Completed")
-        runningTasks--
     }
 
 
