@@ -1,0 +1,11 @@
+chiaLocation: ''
+taskCount: 0
+taskDelay: 0
+outputFolders: []
+tempFolders: []
+bufferSize: []
+k: []
+threads: []
+overrideK: false
+unstopped: false
+logDir: ''

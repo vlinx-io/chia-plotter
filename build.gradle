@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+    id 'application'
+}
+
+group 'io.vlinx'
+version '1.0.0'
+mainClassName='io.vlinx.chia.plotter.MainKt'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'io.vlinx:basic-utils:1.0.3'
+    implementation 'io.vlinx:vlinx-communicate:1.0.1'
+    implementation 'io.vlinx:vlinx-logging:1.0.0'
+    implementation 'io.vlinx:process-utils:1.0.1'
+    implementation 'io.vlinx:config-utils:1.0.0'
+
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
