@@ -15,6 +15,7 @@ class Settings {
     var tempFolders = ArrayList<String>()
     var outputFolders = ArrayList<String>()
     var bufferSize = ArrayList<Int>()
+    var buckets = ArrayList<Int>()
     var threads = ArrayList<Int>()
     var k = ArrayList<Int>()
     var overrideK = false

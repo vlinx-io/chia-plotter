@@ -104,6 +104,11 @@ class Plotter(private val settings: Settings) {
             builder.append(" -b $b ")
         }
 
+        var u = if (settings.buckets.size == 0) 0 else settings.buckets[taskIndex % settings.buckets.size]
+        if (u > 0) {
+            builder.append(" -u $u")
+        }
+
         if (settings.overrideK) {
             builder.append(" --override-k ")
         }
