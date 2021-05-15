@@ -68,9 +68,11 @@ class Plotter(private val settings: Settings) {
             runningTasks++
             totalTasks++
 
-            if (settings.taskDelay > 0) {
-                Logger.INFO(taskId, "Wait ${settings.taskDelay}s to start another task")
-                Thread.sleep((settings.taskDelay * 1000).toLong())
+            if(totalTasks <= settings.taskCount + 1) {
+                if (settings.taskDelay > 0) {
+                    Logger.INFO(taskId, "Wait ${settings.taskDelay}s to start another task")
+                    Thread.sleep((settings.taskDelay * 1000).toLong())
+                }
             }
 
 
